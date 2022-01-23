@@ -181,16 +181,16 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                 Array.from(Array(wordlen)).map((v, i) => {
                     ref.current?.children.item(i)?.classList.remove("filled")
 
-                    if (testword.slice(i, i + 1) == this.theword.slice(i, i + 1)) {
-                        ref.current?.children.item(i)?.classList.add(`match${i}`)
+                    if (testword.slice(i, i + 1) === this.theword.slice(i, i + 1)) {
+                        ref.current?.children.item(i)?.classList.add('match' + i)
                         this.match.push(testword.slice(i, i + 1).toUpperCase())
                     }
                     else if (this.theword.includes(testword.slice(i, i + 1))) {
-                        ref.current?.children.item(i)?.classList.add(`close${i}`)
+                        ref.current?.children.item(i)?.classList.add('close' + i)
                         this.close.push(testword.slice(i, i + 1).toUpperCase())
                     }
                     else {
-                        ref.current?.children.item(i)?.classList.add(`nomatch${i}`)
+                        ref.current?.children.item(i)?.classList.add('nomatch' + i)
                         this.nomatch.push(testword.slice(i, i + 1).toUpperCase())
                     }
                     this.match = this.match.filter(onlyUnique)
@@ -234,13 +234,11 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                 this.rows[this.cur_row].vals[this.cur_letter - 1] = null
                 ref?.current?.children?.item(this.cur_letter - 1)?.classList.remove("filled")
                 this.cur_letter -= 1;
-                this.update()
             }
         }
         // Check for Enter
-        if (key == 'Enter') {
+        else if (key == 'Enter') {
             this.onEnter()
-            this.update()
         }
 
         key = key.toUpperCase()
@@ -250,10 +248,9 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                 row.vals[this.cur_letter] = key
                 ref?.current?.children?.item(this.cur_letter)?.classList.add("filled")
                 this.cur_letter += 1;
-                this.update()
             }
         }
-
+        this.update()
     }
 
     onKeyDown(e: any) {
@@ -261,7 +258,6 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
             return
 
         this.handleKey(e.key)
-        e.stopPropagation()
     }
 
 

@@ -178,19 +178,19 @@
 .keybox.match
 {
   background-color: forestgreen;
-  transition-delay: 1s;
+  transition-delay: 1000ms;
 }
 
 .keybox.close
 {
   background-color: #f8ba37;
-  transition-delay: 1s;
+  transition-delay: 1000ms;
 }
 
 .keybox.nomatch 
 {
   background-color: #777;
-  transition-delay: 1s;
+  transition-delay: 1000ms;
 }
 
 
@@ -202,72 +202,78 @@
 .letter.match1 {
   border: 2px solid black;
   animation: revealmatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.2s;
+  animation-delay: 200ms;
 }
 .letter.match2 {
   border: 2px solid black;
+  animation-delay: 400ms;
   animation: revealmatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.4s;
 }
 .letter.match3 {
   border: 2px solid black;
   animation: revealmatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.6s;
+  animation-delay: 600ms;
 }
 .letter.match4 {
   border: 2px solid black;
   animation: revealmatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.8s;
+  animation-delay: 800ms;
 }
 
 .letter.close0 {
   border: 2px solid black;
   animation: revealclose .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0s;
 }
+
 .letter.close1 {
   border: 2px solid black;
   animation: revealclose .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.2s;
+  animation-delay: 200ms;
 }
+
 .letter.close2 {
   border: 2px solid black;
+  animation-delay: 400ms;
   animation: revealclose .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.4s;
 }
+
 .letter.close3 {
   border: 2px solid black;
   animation: revealclose .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.6s;
+  animation-delay: 600ms;
 }
+
 .letter.close4 {
   border: 2px solid black;
   animation: revealclose .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.8s;
+  animation-delay: 800ms;
 }
 
 .letter.nomatch0 {
   border: 2px solid black;
   animation: revealnomatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0s;
 }
+
 .letter.nomatch1 {
   border: 2px solid black;
   animation: revealnomatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.2s;
+  animation-delay: 200ms;
 }
+
 .letter.nomatch2 {
   border: 2px solid black;
   animation: revealnomatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.4s;
+  animation-delay: 400ms;
 }
+
 .letter.nomatch3 {
   border: 2px solid black;
   animation: revealnomatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.6s;
+  animation-delay: 600ms;
 }
+
 .letter.nomatch4 {
   border: 2px solid black;
   animation: revealnomatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 0.8s;
+  animation-delay: 800ms;
 }
