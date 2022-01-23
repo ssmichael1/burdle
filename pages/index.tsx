@@ -1,8 +1,32 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import GameGrid from '../components/gamegrid.module'
 
+const title = 'Burdle'
+
+const Home: NextPage = () => {
+  return (
+    <div>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content="Infinite Wordle!" />
+
+      </Head>
+
+      <nav className="navbar navbar-expand bg-light navbar-light">
+        <div className="container">
+          <div className="h3">{title}</div>
+        </div>
+      </nav>
+      <div className="container justify-content-center d-flex">
+        <GameGrid />
+      </div>
+    </div>
+  )
+}
+
+/*
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -68,5 +92,5 @@ const Home: NextPage = () => {
     </div>
   )
 }
-
+*/
 export default Home
