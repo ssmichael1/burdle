@@ -51,8 +51,8 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
     modal_body() {
         return (
             this.status == 'win' ?
-                <div>Hi STeven</div> :
-                <div>You Lose</div>
+                <div>Word is {this.theword}</div> :
+                <div>Word is {this.theword}</div>
         )
     }
 
@@ -97,6 +97,9 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
     }
 
     drawKeys(): any {
+        console.log(`match = ${this.match}`)
+        console.log(`close = ${this.close}`)
+        console.log(`nomatch = ${this.nomatch}`)
         return keyboard.map((keyrow, i) => {
             return (
                 <div className="justify-content-center d-flex" key={"keyrow_" + i}>
@@ -183,15 +186,15 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
 
                     if (testword.slice(i, i + 1) == this.theword.slice(i, i + 1)) {
                         ref.current?.children.item(i)?.classList.add(`match${i}`)
-                        this.match.push(this.theword.slice(i, i + 1).toUpperCase())
+                        this.match.push(testword.slice(i, i + 1).toUpperCase())
                     }
                     else if (this.theword.includes(testword.slice(i, i + 1))) {
                         ref.current?.children.item(i)?.classList.add(`close${i}`)
-                        this.close.push(this.theword.slice(i, i + 1).toUpperCase())
+                        this.close.push(testword.slice(i, i + 1).toUpperCase())
                     }
                     else {
                         ref.current?.children.item(i)?.classList.add(`nomatch${i}`)
-                        this.nomatch.push(this.theword.slice(i, i + 1).toUpperCase())
+                        this.nomatch.push(testword.slice(i, i + 1).toUpperCase())
                     }
                     this.match = this.match.filter(onlyUnique)
                     this.close = this.close.filter(onlyUnique)
