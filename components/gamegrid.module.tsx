@@ -97,9 +97,6 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
     }
 
     drawKeys(): any {
-        console.log(`match = ${this.match}`)
-        console.log(`close = ${this.close}`)
-        console.log(`nomatch = ${this.nomatch}`)
         return keyboard.map((keyrow, i) => {
             return (
                 <div className="justify-content-center d-flex" key={"keyrow_" + i}>
