@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+@keyframes growshrink {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1.0);
+  }
+}
+
+@keyframes revealmatch {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1, 0);
+    background-color: white;
+  }
+  100% {
+    transform: scale(1, 1);
+    background-color: lightgreen;
+  }
+}
+
+@keyframes revealclose {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1, 0);
+    background-color: white;
+  }
+  100% {
+    transform: scale(1, 1);
+    background-color: lightyellow;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(.5em);
+  }
+  40% {
+    transform: translate(-.5em);
+  }
+  60% {
+    transform: translate(.5em);
+  }
+  80% {
+    transform: translate(-.5em);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.gamegrid 
+{
+    margin: 0rem;
+    padding: 1rem 1rem;
+    width: 23rem;
+    border: none;
+}
+
+.shake {
+  animation: shake 0.25s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.letter.match {
+  border: 2px solid black;
+  animation: revealmatch .75s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.letter.close {
+  border: 2px solid black;
+  animation: revealclose .75s cubic-bezier(.36,.07,.19,.97) both;
+
+}
+
+
+
+.letter.filled {
+  border: 2px solid black;
+  animation: growshrink .1s linear both;
+
+}
+
+.letter
+{
+    font-family: Roboto, -apple-system, Tahoma, 'Segoi UI';
+    font-weight: bold;
+    font-size: 2.2rem;
+    border: 2px solid lightgray;
+    border-radius: 4px;
+    width: 4rem;
+    height: 4rem;
+    margin-left: 0.4rem;
+    margin-bottom: 0.4rem;
+    line-height: 3rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+}
+
+.keyboard 
+{
+  padding: 0rem 0rem;
+  margin: -1rem;
+}
+
+.keybox
+{
+    font-family: Roboto, -apple-system, Tahoma, 'Segoi UI';
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: 2px solid lightgray;
+    border-radius: 4px;
+    height: 3rem;
+    margin-left: 0.4rem;
+    margin-bottom: 0.4rem;
+    line-height: 3rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    background-color: lightgray;
+  }
+
+.keybox.small
+{
+    width: 2rem;
+}
+
+.keybox.big
+{
+  width: 4rem;
+}
