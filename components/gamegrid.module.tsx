@@ -283,7 +283,6 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
 
         let html = (
             <div>
-                <div className="container">word: {this.theword}</div>
                 <div key='3' className="justify-content-center gamegrid">
                     {this.rows.map((r, i) => this.renderRow(r, i))}
                 </div >
