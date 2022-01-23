@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { NewLifecycle } from 'react'
 import dict from './words5.json'
+import { Modal, Button } from 'react-bootstrap'
 
 const keyboard = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -17,23 +18,15 @@ interface GameState {
 }
 interface GameProps { }
 
+type GameStatus = 'playing' | 'win' | 'loss';
+
 
 export const gamerows = 6
 export const wordlen = 5
 
-const Modal = ({ handleClose, show, children }) => {
-    const showHideClassName = show ? "modal display-block" : "modal display-none";
-
-    return (
-        <div className={showHideClassName}>
-            <section className="modal-main">
-                {children}
-                asdfsdf
-                <button onClick={handleClose}>Close</button>
-            </section>
-        </div>
-    );
-};
+const onlyUnique = (value: any, index: number, self: Array<any>) => {
+    return self.indexOf(value) === index;
+}
 
 export default class GameGrid extends React.Component<GameProps, GameState> {
 
@@ -41,6 +34,27 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
     cur_letter: number;
     rows: Array<Row>
     theword: string;
+    modal: any;
+    status: GameStatus;
+
+    match: Array<string>
+    close: Array<string>
+    nomatch: Array<string>
+
+    modal_title() {
+        return (
+            this.status == 'win' ?
+                'You Win' : 'You Lose'
+        )
+    }
+
+    modal_body() {
+        return (
+            this.status == 'win' ?
+                <div>Hi STeven</div> :
+                <div>You Lose</div>
+        )
+    }
 
     constructor(props: GameProps) {
         super(props)
@@ -53,21 +67,25 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
         })
         this.cur_row = 0
         this.cur_letter = 0
-        let idx = Math.floor(Math.random() * dict.length)
         this.theword = 'steve'
         this.state = {
             showModal: false
         }
+        this.status = 'playing'
+        this.match = []
+        this.close = []
+        this.nomatch = []
     }
 
 
+
     showModal = () => {
-        console.log('showing modal')
         this.setState({ showModal: true });
     };
 
     hideModal = () => {
         this.setState({ showModal: false });
+        //document.getElementById("exampleModal")?.close()
     };
 
     update() {
@@ -88,9 +106,25 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                             if (k.length > 1) {
                                 cname = "col keybox big";
                             }
-
+                            if (this.match.includes(k)) {
+                                cname = cname + " match"
+                            }
+                            else if (this.close.includes(k)) {
+                                cname = cname + " close"
+                            }
+                            else if (this.nomatch.includes(k)) {
+                                cname = cname + " nomatch"
+                            }
                             return (
-                                <div className={cname} key={'key_' + k}>{k}</div>
+                                <button className={cname}
+                                    key={'key_' + k}
+                                    onClick={() => {
+                                        this.handleKey(k == 'BS' ? 'Backspace' :
+                                            (k == 'ENTER' ? 'Enter' : k))
+                                    }}
+                                >
+                                    {k}
+                                </button>
                             )
                         })}
                     </div>
@@ -126,13 +160,7 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
             if (ref.current === null)
                 return;
 
-            // Won Game!
-            if (testword == this.theword) {
-                Array.from(Array(wordlen)).map((v, i) => {
-                    ref.current?.children.item(i)?.classList.add("match")
-                })
-                this.showModal()
-            }
+
             // Not a word!
             else if (!dict.includes(testword)) {
                 //this.cur_row = this.cur_row + 1;
@@ -154,17 +182,37 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                     ref.current?.children.item(i)?.classList.remove("filled")
 
                     if (testword.slice(i, i + 1) == this.theword.slice(i, i + 1)) {
-                        ref.current?.children.item(i)?.classList.add("match")
+                        ref.current?.children.item(i)?.classList.add(`match${i}`)
+                        this.match.push(this.theword.slice(i, i + 1).toUpperCase())
                     }
                     else if (this.theword.includes(testword.slice(i, i + 1))) {
-                        ref.current?.children.item(i)?.classList.add("close")
+                        ref.current?.children.item(i)?.classList.add(`close${i}`)
+                        this.close.push(this.theword.slice(i, i + 1).toUpperCase())
+                    }
+                    else {
+                        ref.current?.children.item(i)?.classList.add(`nomatch${i}`)
+                        this.nomatch.push(this.theword.slice(i, i + 1).toUpperCase())
+                    }
+                    this.match = this.match.filter(onlyUnique)
+                    this.close = this.close.filter(onlyUnique)
+                    this.nomatch = this.nomatch.filter(onlyUnique)
+
+                    // Won Game!
+                    if (testword == this.theword) {
+                        Array.from(Array(wordlen)).map((v, i) => {
+                            ref.current?.children.item(i)?.classList.add("match")
+                        })
+                        this.status = 'win'
+                        setTimeout(this.showModal.bind(this), 1100)
                     }
                 })
 
-                // Are we on to the next row
+                // Lost Game!
                 if (this.cur_row == gamerows - 1) {
-                    return
+                    this.status = 'loss'
+                    setTimeout(this.showModal.bind(this), 1100)
                 }
+                // Are we on to the next row
                 else {
                     this.cur_row = this.cur_row + 1
                     this.cur_letter = 0
@@ -174,6 +222,9 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
     }
 
     handleKey(key: string) {
+        if (this.status !== 'playing')
+            return
+
         let row = this.rows[this.cur_row]
         let ref = this.rows[this.cur_row].ref
 
@@ -208,7 +259,9 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
     onKeyDown(e: any) {
         if (!(e instanceof KeyboardEvent))
             return
+
         this.handleKey(e.key)
+        e.stopPropagation()
     }
 
 
@@ -220,6 +273,8 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
         this.theword = dict[idx];
         this.update()
     }
+
+
     componentWillUnmout() {
         document.removeEventListener("keydown", this.onKeyDown.bind(this))
     }
@@ -229,20 +284,28 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
         let html = (
             <div>
                 <div className="container">word: {this.theword}</div>
-                <div tabIndex={0} key='3' className="justify-content-center gamegrid">
+                <div key='3' className="justify-content-center gamegrid">
                     {this.rows.map((r, i) => this.renderRow(r, i))}
                 </div >
                 <div className="pt-5"></div>
-                <div className="containe justify-content-center keyboard">
+                <div className="container justify-content-center keyboard">
                     {this.drawKeys()}
                 </div>
-
-                <Modal show={this.state.showModal} handleClose={this.hideModal}>
-                    <p>Modal</p>
-                    <p>Data</p>
-                    <p>Word is ${this.theword}</p>
+                <Modal show={this.state.showModal} onHide={this.hideModal} backdrop="static"
+                    keyboard={false}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{this.modal_title()}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {this.modal_body()}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={this.hideModal}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
                 </Modal>
-            </div>
+            </div >
 
         )
         return html
