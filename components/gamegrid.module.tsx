@@ -13,13 +13,27 @@ interface Row {
 }
 
 interface GameState {
-    time: number;
+    showModal: boolean;
 }
 interface GameProps { }
 
 
 export const gamerows = 6
 export const wordlen = 5
+
+const Modal = ({ handleClose, show, children }) => {
+    const showHideClassName = show ? "modal display-block" : "modal display-none";
+
+    return (
+        <div className={showHideClassName}>
+            <section className="modal-main">
+                {children}
+                asdfsdf
+                <button onClick={handleClose}>Close</button>
+            </section>
+        </div>
+    );
+};
 
 export default class GameGrid extends React.Component<GameProps, GameState> {
 
@@ -41,16 +55,33 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
         this.cur_letter = 0
         let idx = Math.floor(Math.random() * dict.length)
         this.theword = 'steve'
+        this.state = {
+            showModal: false
+        }
     }
 
+
+    showModal = () => {
+        console.log('showing modal')
+        this.setState({ showModal: true });
+    };
+
+    hideModal = () => {
+        this.setState({ showModal: false });
+    };
+
     update() {
-        this.setState({ time: Date.now() })
+        this.setState(
+            {
+                showModal: this.state.showModal,
+            }
+        )
     }
 
     drawKeys(): any {
         return keyboard.map((keyrow, i) => {
             return (
-                <div className="justify-content-center d-flex">
+                <div className="justify-content-center d-flex" key={"keyrow_" + i}>
                     <div className="d-flex row">
                         {keyrow.map((k, i) => {
                             let cname = "col keybox small";
@@ -59,7 +90,7 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                             }
 
                             return (
-                                <div className={cname}>{k}</div>
+                                <div className={cname} key={'key_' + k}>{k}</div>
                             )
                         })}
                     </div>
@@ -87,6 +118,7 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
     }
 
     onEnter() {
+
         if ((this.cur_letter == wordlen) && this.cur_row < (gamerows)) {
             let row = this.rows[this.cur_row]
             let ref = this.rows[this.cur_row].ref
@@ -99,6 +131,7 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                 Array.from(Array(wordlen)).map((v, i) => {
                     ref.current?.children.item(i)?.classList.add("match")
                 })
+                this.showModal()
             }
             // Not a word!
             else if (!dict.includes(testword)) {
@@ -195,6 +228,7 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
 
         let html = (
             <div>
+                <div className="container">word: {this.theword}</div>
                 <div tabIndex={0} key='3' className="justify-content-center gamegrid">
                     {this.rows.map((r, i) => this.renderRow(r, i))}
                 </div >
@@ -202,7 +236,14 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                 <div className="containe justify-content-center keyboard">
                     {this.drawKeys()}
                 </div>
+
+                <Modal show={this.state.showModal} handleClose={this.hideModal}>
+                    <p>Modal</p>
+                    <p>Data</p>
+                    <p>Word is ${this.theword}</p>
+                </Modal>
             </div>
+
         )
         return html
     }
