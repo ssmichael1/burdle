@@ -385,7 +385,7 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
         this.setState(
             {
                 ...this.state,
-                theword: 'brown'
+                theword: dict[idx]
             }
         )
     }
