@@ -7,27 +7,50 @@ interface InfoModalProps {
 }
 interface InfoModalState { }
 
+
+const burdle = () => {
+    return (
+        <span className="burdletext"> BURDLE </span>
+    )
+}
+const wordle = () => {
+    return (
+        <span className="burdletext">WORDLE</span>
+    )
+}
+
 export default class InfoModal
     extends React.Component<InfoModalProps, InfoModalState> {
 
     constructor(props: InfoModalProps) {
         super(props)
     }
+
+
+
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.hideFunc} backdrop="static"
                 keyboard={false}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Info</Modal.Title>
+                    <Modal.Title>
+                        {burdle()}
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    This is the bddody
+                    <div className="container infotext">
+                        {burdle()} is similar to {wordle()}, <i>except</i> it is possible to play as many times as you would like.
+                    </div>
+                    <div className="container infotext">
+                        {burdle()} is statically hosted by github pages.  Source code is at: <a href="https://github.com/stevensamirmichael/burdle">https://github.com/stevensamirmichael/burdle</a>
+                        <p></p>                       <p>Current git hash:</p>
+                    </div>
+                    <div className="container infotext">
+                        Contact Info: Steven Michael <a href="mailto:ssmichael@gmail.com">ssmichael@gmail.com</a>
+                    </div>
+
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={this.props.hideFunc}>
-                        Close
-                    </Button>
-                </Modal.Footer>
+
             </Modal>
         )
     }

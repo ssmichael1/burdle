@@ -81,7 +81,7 @@ class GameLetter extends React.Component<LetterProps, LetterState> {
                     //c += ` nomatch${this.props.idx}`
                     this.ref.current.classList.add('nomatch')
                 }
-            }, this.props.idx * 200)
+            }, this.props.idx * 250)
         }
 
         return (
@@ -424,11 +424,6 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                     <Modal.Body>
                         {this.modal_body()}
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="primary" onClick={this.hideModal}>
-                            Close
-                        </Button>
-                    </Modal.Footer>
                 </Modal>
             </div >
 
