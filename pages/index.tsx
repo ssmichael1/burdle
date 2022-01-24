@@ -4,8 +4,32 @@ import GameGrid from '../components/gamegrid.module'
 import React, { useState } from 'react'
 import InfoModal from '../components/infomodal.module'
 import StatsModal from '../components/statsmodal.module'
+import Script from 'next/script'
 
 const title = 'Burdle'
+
+const analytics_id = process.env.ANALYTICS_ID
+
+const analytics = () => {
+  return (
+    <>
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${analytics_id}`}
+      />
+
+      <Script strategy="lazyOnload">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${analytics_id}');
+        `}
+      </Script>
+    </>
+  );
+}
 
 const Home: NextPage = () => {
   const [showInfo, setShowInfo] = useState(false)
@@ -16,6 +40,9 @@ const Home: NextPage = () => {
       <Head>
         <title>{title}</title>
         <meta name="description" content="Infinite Wordle!" />
+        {
+          (analytics === undefined) ? null : analytics()
+        }
 
       </Head>
 
