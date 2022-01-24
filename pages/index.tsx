@@ -38,10 +38,6 @@ const Home: NextPage = () => {
         </div>
         <div className="container justify-content-center d-flex mt-5">
           <div className="myfooter justify-content-center">
-            <a className="footertext"
-              href="https://github.com/stevensamirmichael/burdle">
-              https://github.com/stevensamirmichel/burdle
-            </a>
           </div>
         </div>
       </main>
