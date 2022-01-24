@@ -1,49 +1,42 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import GameGrid from '../components/gamegrid.module'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import InfoModal from '../components/infomodal.module'
 import StatsModal from '../components/statsmodal.module'
 import Script from 'next/script'
 
 const title = 'Burdle'
 
-const analytics_id = process.env.ANALYTICS_ID
 
-const analytics = () => {
-  return (
-    <>
-      <Script
-        strategy="lazyOnload"
-        src={`https://www.googletagmanager.com/gtag/js?id=${analytics_id}`}
-      />
-
-      <Script strategy="lazyOnload">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', '${analytics_id}');
-        `}
-      </Script>
-    </>
-  );
-}
 
 const Home: NextPage = () => {
   const [showInfo, setShowInfo] = useState(false)
   const [showStats, setShowStats] = useState(false)
+  // Hard coded; can't figure out easy workaroud with 
+  // satic pages served by github
+  const analytics_id = 'G-PLSFESTZJQ'
 
   return (
-    <div>
+    < div >
       <Head>
         <title>{title}</title>
         <meta name="description" content="Infinite Wordle!" />
-        {
-          (analytics === undefined) ? null : analytics()
-        }
+        <>
+          <Script
+            strategy="lazyOnload"
+            src={`https://www.googletagmanager.com/gtag/js?id=${analytics_id}`}
+          />
 
+          <Script strategy="lazyOnload">
+            {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${analytics_id}');
+        `}
+          </Script>
+        </>
       </Head>
 
       <main className="game">
@@ -66,6 +59,8 @@ const Home: NextPage = () => {
             </div>
           </div>
         </nav>
+
+
 
         <div className="container justify-content-center d-flex">
           <GameGrid />
