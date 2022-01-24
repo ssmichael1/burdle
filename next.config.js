@@ -5,7 +5,8 @@ const nextConfig = {
 
 const isProd = process.env.NODE_ENV === 'production'
 
+/*assetPrefix: isProd ? "/burdle/" : "",*/
 
 module.exports = {
-  assetPrefix: isProd ? "/burdle/" : "",
+  assetPrefix: "/burdle/"
 }
