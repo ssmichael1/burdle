@@ -93,25 +93,6 @@
 }
 
 
-
-.letter.match {
-  border: 2px solid black;
-  animation: revealmatch .25s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 1s
-}
-
-
-
-.letter.close {
-  border: 2px solid black;
-  animation: revealclose .25s cubic-bezier(.36,.07,.19,.97) both;
-}
-
-.letter.nomatch {
-  border: 2px solid black;
-  animation: revealnomatch .25s cubic-bezier(.36,.07,.19,.97) both;
-}
-
 .letter.filled {
   animation: growshrink .1s linear both;
 }
@@ -193,87 +174,15 @@
   transition-delay: 1000ms;
 }
 
-
-
-.letter.match0 {
+.letter.match {
   border: 2px solid black;
   animation: revealmatch .2s cubic-bezier(.36,.07,.19,.97) both;
 }
-.letter.match1 {
-  border: 2px solid black;
-  animation: revealmatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 200ms;
-}
-.letter.match2 {
-  border: 2px solid black;
-  animation-delay: 400ms;
-  animation: revealmatch .2s cubic-bezier(.36,.07,.19,.97) both;
-}
-.letter.match3 {
-  border: 2px solid black;
-  animation: revealmatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 600ms;
-}
-.letter.match4 {
-  border: 2px solid black;
-  animation: revealmatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 800ms;
-}
-
-.letter.close0 {
+.letter.close {
   border: 2px solid black;
   animation: revealclose .2s cubic-bezier(.36,.07,.19,.97) both;
 }
-
-.letter.close1 {
-  border: 2px solid black;
-  animation: revealclose .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 200ms;
-}
-
-.letter.close2 {
-  border: 2px solid black;
-  animation-delay: 400ms;
-  animation: revealclose .2s cubic-bezier(.36,.07,.19,.97) both;
-}
-
-.letter.close3 {
-  border: 2px solid black;
-  animation: revealclose .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 600ms;
-}
-
-.letter.close4 {
-  border: 2px solid black;
-  animation: revealclose .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 800ms;
-}
-
-.letter.nomatch0 {
+.letter.nomatch {
   border: 2px solid black;
   animation: revealnomatch .2s cubic-bezier(.36,.07,.19,.97) both;
-}
-
-.letter.nomatch1 {
-  border: 2px solid black;
-  animation: revealnomatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 200ms;
-}
-
-.letter.nomatch2 {
-  border: 2px solid black;
-  animation: revealnomatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 400ms;
-}
-
-.letter.nomatch3 {
-  border: 2px solid black;
-  animation: revealnomatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 600ms;
-}
-
-.letter.nomatch4 {
-  border: 2px solid black;
-  animation: revealnomatch .2s cubic-bezier(.36,.07,.19,.97) both;
-  animation-delay: 800ms;
 }
