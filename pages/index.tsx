@@ -3,11 +3,13 @@ import Head from 'next/head'
 import GameGrid from '../components/gamegrid.module'
 import React, { useState } from 'react'
 import InfoModal from '../components/infomodal.module'
+import StatsModal from '../components/statsmodal.module'
 
 const title = 'Burdle'
 
 const Home: NextPage = () => {
   const [showInfo, setShowInfo] = useState(false)
+  const [showStats, setShowStats] = useState(false)
 
   return (
     <div>
@@ -28,7 +30,12 @@ const Home: NextPage = () => {
                 </button>
               </div>
               <div className="navtitle">{title.toUpperCase()}</div>
-              <div className="navother"></div>
+              <div className="navother">
+                <button className="empty"
+                  onClick={() => { setShowStats(true) }}>
+                  <img src="chart.svg" className="topsvg" />
+                </button>
+              </div>
             </div>
           </div>
         </nav>
@@ -42,6 +49,7 @@ const Home: NextPage = () => {
         </div>
       </main>
       <InfoModal show={showInfo} hideFunc={() => { setShowInfo(false) }} />
+      <StatsModal show={showStats} hideFunc={() => { setShowStats(false) }} />
 
     </div >
   )

@@ -2,6 +2,7 @@ import React, { NewLifecycle } from 'react'
 import dict from './words5.json'
 import { Modal, Button } from 'react-bootstrap'
 import { takeCoverage } from 'v8';
+import BurdleCookie, { CookieFormat } from './burdlecookie'
 
 const keyboard = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -314,6 +315,12 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                 ...this.state,
                 status: 'win'
             })
+            let c = BurdleCookie.get()
+            BurdleCookie.set({
+                ...c,
+                nwins: c.nwins + 1,
+                nplayed: c.nplayed + 1
+            })
             return
         }
         // Lost Game!
@@ -321,6 +328,12 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
             this.setState({
                 ...this.state,
                 status: 'loss'
+            })
+            let c = BurdleCookie.get()
+            BurdleCookie.set({
+                ...c,
+                nlosses: c.nlosses + 1,
+                nplayed: c.nplayed + 1
             })
             setTimeout(this.showModal.bind(this), 1100)
         }
