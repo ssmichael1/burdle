@@ -8,6 +8,7 @@ const title = 'Burdle'
 
 const Home: NextPage = () => {
   const [showInfo, setShowInfo] = useState(false)
+  const [showStats, setShowStats] = useState(false)
 
   return (
     <div>
@@ -28,7 +29,12 @@ const Home: NextPage = () => {
                 </button>
               </div>
               <div className="navtitle">{title.toUpperCase()}</div>
-              <div className="navother"></div>
+              <div className="navother">
+                <button className="empty"
+                  onClick={() => { setShowStats(true) }}>
+                  <img src="chart.svg" className="topsvg" />
+                </button>
+              </div>
             </div>
           </div>
         </nav>
