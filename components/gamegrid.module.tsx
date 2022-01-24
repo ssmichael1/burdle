@@ -152,73 +152,91 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
     }
 
     onEnter() {
+        // Enter only valid at end of line
+        if (this.cur_letter != wordlen)
+            return
 
-        if ((this.cur_letter == wordlen) && this.cur_row < (gamerows)) {
-            let row = this.rows[this.cur_row]
-            let ref = this.rows[this.cur_row].ref
-            let testword = row.vals.join('').toLowerCase()
-            if (ref.current === null)
-                return;
+        // Get current row
+        let row = this.rows[this.cur_row]
+        let ref = this.rows[this.cur_row].ref
 
+        // Get the testword
+        let testword = row.vals.join('').toLowerCase()
+        if (ref.current === null)
+            return;
 
-            // Not a word!
-            else if (!dict.includes(testword)) {
-                //this.cur_row = this.cur_row + 1;
-                this.cur_letter = 0;
-                if (ref.current != null) {
-                    this.rows[this.cur_row].vals = Array(wordlen).fill(null)
-                    Array.from(Array(wordlen)).map((v, i) => {
-                        ref.current?.children.item(i)?.classList.remove("filled")
-                    }
-                    )
-                    ref.current.classList.add("shake")
-                    setTimeout(() => { ref.current?.classList.remove("shake") }, 500)
-                    this.update()
-                }
+        // Not a word!
+        if (!dict.includes(testword)) {
+            //this.cur_row = this.cur_row + 1;
+            this.cur_letter = 0;
+            this.rows[this.cur_row].vals = Array(wordlen).fill(null)
+            Array.from(Array(wordlen)).map((v, i) => {
+                ref.current?.children.item(i)?.classList.remove("filled")
             }
-            // Got a word
-            else {
-                Array.from(Array(wordlen)).map((v, i) => {
-                    ref.current?.children.item(i)?.classList.remove("filled")
-
-                    if (testword.slice(i, i + 1) === this.theword.slice(i, i + 1)) {
-                        ref.current?.children.item(i)?.classList.add('match' + i)
-                        this.match.push(testword.slice(i, i + 1).toUpperCase())
-                    }
-                    else if (this.theword.includes(testword.slice(i, i + 1))) {
-                        ref.current?.children.item(i)?.classList.add('close' + i)
-                        this.close.push(testword.slice(i, i + 1).toUpperCase())
-                    }
-                    else {
-                        ref.current?.children.item(i)?.classList.add('nomatch' + i)
-                        this.nomatch.push(testword.slice(i, i + 1).toUpperCase())
-                    }
-                    this.match = this.match.filter(onlyUnique)
-                    this.close = this.close.filter(onlyUnique)
-                    this.nomatch = this.nomatch.filter(onlyUnique)
-
-                    // Won Game!
-                    if (testword == this.theword) {
-                        Array.from(Array(wordlen)).map((v, i) => {
-                            ref.current?.children.item(i)?.classList.add("match")
-                        })
-                        this.status = 'win'
-                        setTimeout(this.showModal.bind(this), 1100)
-                    }
-                })
-
-                // Lost Game!
-                if (this.cur_row == gamerows - 1) {
-                    this.status = 'loss'
-                    setTimeout(this.showModal.bind(this), 1100)
-                }
-                // Are we on to the next row
-                else {
-                    this.cur_row = this.cur_row + 1
-                    this.cur_letter = 0
-                }
-            }
+            )
+            ref.current.classList.add("shake")
+            setTimeout(() => { ref.current?.classList.remove("shake") }, 500)
+            this.update()
+            return
         }
+
+        // Got a word
+        // Remove 'filled' class
+        Array.from(Array(wordlen)).map((v, i) => {
+            ref.current?.children.item(i)?.classList.remove("filled")
+        })
+
+        let localmatches: Array<string> = []
+
+        // Look for exact matches
+        Array.from(Array(wordlen)).map((v, i) => {
+            let letter = testword.slice(i, i + 1)
+            if (letter === this.theword.slice(i, i + 1)) {
+                ref.current?.children.item(i)?.classList.add('match' + i)
+                this.match.push(testword.slice(i, i + 1).toUpperCase())
+                localmatches.push(letter)
+            }
+        })
+
+        Array.from(Array(wordlen)).map((v, i) => {
+            let letter = testword.slice(i, i + 1)
+
+            // CLose match but not previous exact
+            if ((this.theword.includes(letter)) && (!localmatches.includes(letter))) {
+                ref.current?.children.item(i)?.classList.add('close' + i)
+                this.close.push(letter.toUpperCase())
+            }
+            // no matches
+            else if (letter != this.theword.slice(i, i + 1)) {
+                ref.current?.children.item(i)?.classList.add('nomatch' + i)
+                this.nomatch.push(letter.toUpperCase())
+            }
+
+        })
+        this.match = this.match.filter(onlyUnique)
+        this.close = this.close.filter(onlyUnique)
+        this.nomatch = this.nomatch.filter(onlyUnique)
+
+        // Won Game!
+        if (testword == this.theword) {
+            Array.from(Array(wordlen)).map((v, i) => {
+                ref.current?.children.item(i)?.classList.add("match")
+            })
+            this.status = 'win'
+            setTimeout(this.showModal.bind(this), 1100)
+        }
+        // Lost Game!
+        else if (this.cur_row == gamerows - 1) {
+            this.status = 'loss'
+            setTimeout(this.showModal.bind(this), 1100)
+        }
+        // on to the next row
+        else {
+            this.cur_row = this.cur_row + 1
+            this.cur_letter = 0
+        }
+
+
     }
 
     handleKey(key: string) {
