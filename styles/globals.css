@@ -19,6 +19,18 @@ a {
   box-sizing: border-box;
 }
 
+
+.empty {
+  border: none;
+  background-color: inherit;
+}
+
+.topsvg  {
+  filter: invert(0.5);
+  width: 1rem;
+  margin: 0;
+}
+
 .mynavbar {
   width: 500px;
   text-align: center;
