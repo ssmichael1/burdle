@@ -19,7 +19,7 @@ const Home: NextPage = () => {
           <div className="container d-flex justify-content-center">
             <div className="mynavbar d-flex justify-content-between">
               <div className="navother"></div>
-              <div className="navtitle">{title}</div>
+              <div className="navtitle">{title.toUpperCase()}</div>
               <div className="navother"></div>
             </div>
           </div>
