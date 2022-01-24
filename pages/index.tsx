@@ -1,11 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import GameGrid from '../components/gamegrid.module'
+import React, { useState } from 'react'
+import InfoModal from '../components/infomodal.module'
 
 const title = 'Burdle'
 
 const Home: NextPage = () => {
+  const [showInfo, setShowInfo] = useState(false)
+
   return (
     <div>
       <Head>
@@ -18,7 +21,12 @@ const Home: NextPage = () => {
         <nav className="navbar">
           <div className="container d-flex justify-content-center">
             <div className="mynavbar d-flex justify-content-between">
-              <div className="navother"></div>
+              <div className="navother">
+                <button className="empty"
+                  onClick={() => { setShowInfo(true) }}>
+                  <img src="info-circle.svg" className="topsvg" />
+                </button>
+              </div>
               <div className="navtitle">{title.toUpperCase()}</div>
               <div className="navother"></div>
             </div>
@@ -37,6 +45,8 @@ const Home: NextPage = () => {
           </div>
         </div>
       </main>
+      <InfoModal show={showInfo} hideFunc={() => { setShowInfo(false) }} />
+
     </div >
   )
 }
