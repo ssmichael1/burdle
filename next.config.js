@@ -3,10 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-const isProd = process.env.NODE_ENV === 'production'
+/*c onst isProd = process.env.NODE_ENV === 'production'*/
 
 /*assetPrefix: isProd ? "/burdle/" : "",*/
+/*  assetPrefix: "/burdle/" */
 
-module.exports = {
-  assetPrefix: "/burdle/"
-}
+module.exports = nextConfig
