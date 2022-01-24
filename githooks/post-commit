@@ -1,2 +1,2 @@
 #!/bin/sh
-echo '{\n  githash: "'`git rev-parse --short HEAD`'"\n}' > components/githash.json
+echo '{\n  "githash": "'`git rev-parse --short HEAD`'"\n}' > components/githash.json

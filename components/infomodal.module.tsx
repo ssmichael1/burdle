@@ -1,5 +1,6 @@
 import React, { NewLifecycle } from 'react'
 import { Modal, Button } from 'react-bootstrap'
+import gitinfo from './githash.json'
 
 interface InfoModalProps {
     show: boolean,
@@ -43,7 +44,8 @@ export default class InfoModal
                     </div>
                     <div className="container infotext">
                         {burdle()} is statically hosted by github pages.  Source code is at: <a href="https://github.com/stevensamirmichael/burdle">https://github.com/stevensamirmichael/burdle</a>
-                        <p></p>                       <p>Current git hash:</p>
+                        <p></p>
+                        <p>Current git hash: {gitinfo.githash}</p>
                     </div>
                     <div className="container infotext">
                         Contact Info: Steven Michael <a href="mailto:ssmichael@gmail.com">ssmichael@gmail.com</a>
