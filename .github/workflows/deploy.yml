@@ -38,7 +38,7 @@ jobs:
       - name: Build
         run: |
           npm i --legacy-peer-deps
-          githooks/post-commit
+          echo '{\n  "githash": "'`git rev-parse --short HEAD`'"\n}' > components/githash.json
 					npm run build
           npm run export
           echo "burdle.app" > out/CNAME
