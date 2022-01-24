@@ -3,6 +3,7 @@ import Head from 'next/head'
 import GameGrid from '../components/gamegrid.module'
 import React, { useState } from 'react'
 import InfoModal from '../components/infomodal.module'
+import StatsModal from '../components/statsmodal.module'
 
 const title = 'Burdle'
 
@@ -48,6 +49,7 @@ const Home: NextPage = () => {
         </div>
       </main>
       <InfoModal show={showInfo} hideFunc={() => { setShowInfo(false) }} />
+      <StatsModal show={showStats} hideFunc={() => { setShowStats(false) }} />
 
     </div >
   )
