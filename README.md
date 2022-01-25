@@ -1,34 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# <strong>BURDLE</strong> is at [https://burdle.app](https://burdle.app)
 
-## Getting Started
+ <strong>BURDLE</strong> is a reproduction of the excellent [<strong>WORDLE</strong>](https://www.powerlanguage.co.uk/wordle/) game. 
 
-First, run the development server:
+ <strong>BURDLE</strong>, however, allows for infinite play rather than a single word per day.  
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+----
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+##  Details
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+ <strong>BURDLE</strong> is written using [next.js](https://nextjs.org) with [react.js](https://reactjs.org) components.  This is my first application using these components.  
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<strong>BURDLE</strong> stands for "Better Worlde", a name my son came up with as I was working on the game.
 
-## Learn More
+<strong>BURDLE</strong> is a static web page hosted by github-pages at [https://burdle.app](https://burdle.app)
 
-To learn more about Next.js, take a look at the following resources:
+---
+## Author
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Steven Michael (ssmichael@gmail.com)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
+## License
 
-## Deploy on Vercel
+ISC License (ISC)
+Copyright 2022 Steven Michael (ssmichael@gmail.com)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE

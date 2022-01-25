@@ -1,0 +1,6 @@
+Sitemap: https://burdle.app/sitemap.xml
+
+User-agent: *
+Allow: /*
+
+Disallow: /api/*

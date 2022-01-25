@@ -20,6 +20,10 @@ const Home: NextPage = () => {
       <Head>
         <title>{title}</title>
         <meta name="description" content="Infinite Wordle!" />
+        <meta property="og:title" content="BURDLE" />
+        <meta property="og:description" content="BURDLE is a copy of WORDLE that allows for infinite playing" />
+        <meta property="og:url" content="https://myclothingstore.com/about" />
+        <meta property="og:type" content="website" />
       </Head>
 
       <main className="game">
