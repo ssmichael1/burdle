@@ -149,15 +149,13 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
     modal_title() {
         return (
             this.state.status == 'win' ?
-                'You Win' : 'You Lose'
+                'You Win!' : 'You Did Not Guess Word'
         )
     }
 
     modal_body() {
         return (
-            this.state.status == 'win' ?
-                <div>Word is {this.state.theword}</div> :
-                <div>Word is {this.state.theword}</div>
+            <div>Word is <span className="burdletext">{this.state.theword}</span></div>
         )
     }
 
@@ -443,6 +441,15 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                     <Modal.Body>
                         {this.modal_body()}
                     </Modal.Body>
+                    <Modal.Footer>
+                        <button type="button"
+                            className="btn btn-secondary"
+                            onClick={() => {
+                                this.hideModal()
+                                window.location.reload()
+                            }}
+                        >Play Again</button>
+                    </Modal.Footer>
                 </Modal>
             </div >
 
