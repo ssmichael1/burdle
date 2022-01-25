@@ -232,7 +232,10 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
                                             (k == 'ENTER' ? 'Enter' : k))
                                     }}
                                 >
-                                    {k}
+                                    {
+                                        k == 'BS' ?
+                                            <img src='backspace.svg' className='backspace' /> : k
+                                    }
                                 </button>
                             )
                         })}
