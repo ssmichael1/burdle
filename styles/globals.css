@@ -32,7 +32,7 @@ a {
 }
 
 .mynavbar {
-  width: 500px;
+  width: 700px;
   text-align: center;
   border-bottom: 1px solid lightgray;
   color: darkgray;
@@ -57,7 +57,7 @@ a {
   background-color: #fcfcfc;
   border-top: 1px solid lightgray;
   color: #333;
-  width: 500px;
+  width: 700px;
   text-align: center;
   display: flex;
 }

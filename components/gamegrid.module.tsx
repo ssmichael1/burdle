@@ -414,23 +414,26 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
     render() {
 
         let html = (
-            <div>
-                <div key='gamegrid' className="justify-content-center gamegrid">
-                    {
-                        // Render rows
-                        Array.from(Array(gamerows)).map((v, i) => {
-                            return (
-                                <GameRow
-                                    key={'row' + i}
-                                    val={this.state.rows[i]}
-                                    idx={i} />
-                            )
-                        })
-                    }
-                </div >
-                <div className="pt-5"></div>
-                <div className="container justify-content-center keyboard">
-                    {this.drawKeys()}
+            <div className="justify-content-center">
+                <div className="justify-content-center d-flex pb-5">
+                    <div key='gamegrid' className="column justify-content-center gamegrid">
+                        {
+                            // Render rows
+                            Array.from(Array(gamerows)).map((v, i) => {
+                                return (
+                                    <GameRow
+                                        key={'row' + i}
+                                        val={this.state.rows[i]}
+                                        idx={i} />
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="column justify-content-center keyboard">
+                        {this.drawKeys()}
+                    </div>
                 </div>
                 <Modal show={this.state.showModal} onHide={this.hideModal} backdrop="static"
                     keyboard={false}>
