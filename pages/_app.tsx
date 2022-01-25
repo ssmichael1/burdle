@@ -22,19 +22,22 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [router.events])
 
-  //return <Component {...pageProps} />
-  return (
-    <>
-      {/* Global Site Tag (gtag.js) - Google Analytics */}
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
-      />
-      <Script
-        id="gtag-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
+  if (gtag.GA_TRACKING_ID === undefined)
+    return <Component {...pageProps} />
+
+  else
+    return (
+      <>
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -42,11 +45,12 @@ function MyApp({ Component, pageProps }: AppProps) {
               page_path: window.location.pathname,
             });
           `,
-        }}
-      />
-      <Component {...pageProps} />
-    </>
-  )
+          }}
+        />
+        <Component {...pageProps} />
+      </>
+    )
+
 }
 
 export default MyApp
