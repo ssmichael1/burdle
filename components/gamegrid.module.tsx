@@ -415,7 +415,7 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
 
         let html = (
             <div className="justify-content-center">
-                <div className="justify-content-center d-flex pb-5">
+                <div className="justify-content-center d-flex pb-4">
                     <div key='gamegrid' className="column justify-content-center gamegrid">
                         {
                             // Render rows
