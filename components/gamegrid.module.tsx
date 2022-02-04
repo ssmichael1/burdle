@@ -276,7 +276,8 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
         }
 
         // Got a word
-        let localmatches: Array<string> = []
+
+        let wordasarray = Array.from(this.state.theword)
 
         // Look for exact matches
         Array.from(Array(wordlen)).map((v, i) => {
@@ -285,23 +286,25 @@ export default class GameGrid extends React.Component<GameProps, GameState> {
             if (letter === theword.slice(i, i + 1)) {
                 row.letters[i].status = 'match'
                 this.match.push(testword.slice(i, i + 1).toUpperCase())
-                localmatches.push(letter)
+                var idx = wordasarray.findIndex(p => (p == letter));
+                wordasarray.splice(idx, 1)
             }
         })
-
         Array.from(Array(wordlen)).map((v, i) => {
             let letter = testword.slice(i, i + 1)
             let theword = this.state.theword
 
-            // CLose match but not previous exact
-            if ((theword.includes(letter)) && (!localmatches.includes(letter))) {
-                row.letters[i].status = 'inword'
-                this.close.push(letter.toUpperCase())
-            }
-            // no matches
-            else if (letter != theword.slice(i, i + 1)) {
-                row.letters[i].status = 'nomatch'
-                this.nomatch.push(letter.toUpperCase())
+            if (letter !== theword.slice(i, i + 1)) {
+                let idx = wordasarray.findIndex(p => (p == letter))
+                if (idx >= 0) {
+                    row.letters[i].status = 'inword'
+                    this.close.push(letter.toUpperCase())
+                    wordasarray.splice(idx, 1)
+                }
+                else {
+                    row.letters[i].status = 'nomatch'
+                    this.nomatch.push(letter.toUpperCase())
+                }
             }
 
         })
