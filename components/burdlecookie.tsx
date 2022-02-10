@@ -10,7 +10,13 @@ export interface CookieFormat {
 }
 
 const set = (c: CookieFormat) => {
-    cookies.set('burdle', c)
+    // Cookie expires 10 years in future
+    cookies.set('burdle', c,
+        {
+            domain: 'bordle.app',
+            secure: true,
+            expires: new Date(Date.now() + 86400 * 365.25 * 10 * 1000)
+        })
 }
 
 const get = (): CookieFormat => {

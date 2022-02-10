@@ -4,6 +4,7 @@ import GameGrid from '../components/gamegrid.module'
 import React, { useState } from 'react'
 import InfoModal from '../components/infomodal.module'
 import StatsModal from '../components/statsmodal.module'
+import SettingsModal from '../components/settingsmodal.module'
 
 const title = 'Burdle'
 
@@ -12,6 +13,7 @@ const title = 'Burdle'
 const Home: NextPage = () => {
   const [showInfo, setShowInfo] = useState(false)
   const [showStats, setShowStats] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
   // Hard coded; can't figure out easy workaroud with 
   // satic pages served by github
 
@@ -39,6 +41,11 @@ const Home: NextPage = () => {
               <div className="navtitle">{title.toUpperCase()}</div>
               <div className="navother">
                 <button className="empty"
+                  onClick={() => setShowSettings(true)}>
+                  <img src="gear-fill.svg" className="topsvg" />
+                </button>
+
+                <button className="empty"
                   onClick={() => { setShowStats(true) }}>
                   <img src="chart.svg" className="topsvg" />
                 </button>
@@ -59,7 +66,7 @@ const Home: NextPage = () => {
       </main>
       <InfoModal show={showInfo} hideFunc={() => { setShowInfo(false) }} />
       <StatsModal show={showStats} hideFunc={() => { setShowStats(false) }} />
-
+      <SettingsModal show={showSettings} hideFunc={() => { setShowSettings(false) }} />
     </div >
   )
 }
